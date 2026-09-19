@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Source_Serif_4 } from "next/font/google";
+import { headers } from "next/headers";
 import { copy } from "@/lib/site";
 import "./globals.css";
 
@@ -18,42 +19,49 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const fallbackSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+export async function generateMetadata(): Promise<Metadata> {
+  const requestHeaders = await headers();
+  const forwardedHost = requestHeaders.get("x-forwarded-host");
+  const host = (forwardedHost ?? requestHeaders.get("host"))?.split(",")[0].trim();
+  const forwardedProtocol = requestHeaders.get("x-forwarded-proto");
+  const protocol = forwardedProtocol?.split(",")[0].trim() || (host?.startsWith("localhost") ? "http" : "https");
+  const siteUrl = host ? `${protocol}://${host}` : fallbackSiteUrl;
+  const unfurlImage = `${siteUrl}/assets/unfurl.png`;
 
-  title: copy.pageTitle,
-  description: copy.pageDescription,
-
-  icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
-  },
-
-  openGraph: {
+  return {
+    metadataBase: new URL(siteUrl),
     title: copy.pageTitle,
     description: copy.pageDescription,
-    siteName: copy.name,
-    type: "website",
-    url: siteUrl,
-    images: [
-      {
-        url: "/assets/unfurl.png",
-        width: 968,
-        height: 870,
-        alt: "The Dumb Project",
-      },
-    ],
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: copy.pageTitle,
-    description: copy.pageDescription,
-    images: ["/assets/unfurl.png"],
-  },
-};
+    alternates: { canonical: siteUrl },
+    icons: {
+      icon: "/icon.png",
+      apple: "/icon.png",
+    },
+    openGraph: {
+      title: copy.pageTitle,
+      description: copy.pageDescription,
+      siteName: copy.name,
+      type: "website",
+      url: siteUrl,
+      images: [
+        {
+          url: unfurlImage,
+          width: 968,
+          height: 870,
+          alt: "The Dumb Project",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: copy.pageTitle,
+      description: copy.pageDescription,
+      images: [unfurlImage],
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#cbcbce",
