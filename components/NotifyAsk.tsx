@@ -120,7 +120,7 @@ export function NotifyAsk() {
         <button
           className="notify__action"
           type="submit"
-          disabled={status === "sending" || done}
+          disabled={done}
         >
           {done ? <Check /> : null}
           <span>{done ? copy.sent : copy.action}</span>
