@@ -18,8 +18,10 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://freelace-black.vercel.app"),
+  metadataBase: new URL(siteUrl),
 
   title: copy.pageTitle,
   description: copy.pageDescription,
@@ -34,10 +36,10 @@ export const metadata: Metadata = {
     description: copy.pageDescription,
     siteName: copy.name,
     type: "website",
-    url: "https://freelace-black.vercel.app",
+    url: siteUrl,
     images: [
       {
-        url: "https://freelace-black.vercel.app/assets/unfurl.png",
+        url: "/assets/unfurl.png",
         width: 968,
         height: 870,
         alt: "The Dumb Project",
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: copy.pageTitle,
     description: copy.pageDescription,
-    images: ["https://freelace-black.vercel.app/assets/unfurl.png"],
+    images: ["/assets/unfurl.png"],
   },
 };
 

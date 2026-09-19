@@ -124,9 +124,14 @@ Open [http://localhost:3000](http://localhost:3000) (or `http://localhost:3001` 
 Create a `.env.local` in the project root:
 
 ```bash
+# Public canonical origin — used for metadataBase, OpenGraph and Twitter URLs
+NEXT_PUBLIC_SITE_URL="https://your-domain.com"
+
 # Google Apps Script Web App endpoint used by lib/subscribers.ts
 GOOGLE_SHEETS_WEB_APP_URL="https://script.google.com/macros/s/XXXXXXXX/exec"
 ```
+
+`NEXT_PUBLIC_SITE_URL` feeds `metadataBase` in [`app/layout.tsx`](app/layout.tsx); the OpenGraph and Twitter card images are relative (`/assets/unfurl.png`) and resolve against it, so switching domains requires no code change.
 
 The Apps Script app should:
 
@@ -182,10 +187,10 @@ The fastest path is [Vercel](https://vercel.com/new):
 
 1. Push the repository to GitHub.
 2. Import the project into Vercel.
-3. Add `GOOGLE_SHEETS_WEB_APP_URL` under **Project → Settings → Environment Variables**.
+3. Add `NEXT_PUBLIC_SITE_URL` and `GOOGLE_SHEETS_WEB_APP_URL` under **Project → Settings → Environment Variables**.
 4. Deploy — Next.js optimizes assets and runs `/api/notify` as a serverless function.
 
-> Before going live, update `metadataBase` and the OpenGraph/Twitter image URLs in [`app/layout.tsx`](app/layout.tsx) to your production domain.
+> Set `NEXT_PUBLIC_SITE_URL` to the production domain so OpenGraph and Twitter cards point at the right host.
 
 ---
 
