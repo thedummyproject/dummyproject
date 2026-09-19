@@ -1,0 +1,778 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Test Tiempos Fine", "Tiempos Fine", var(--font-display-src), "Source Serif 4", serif;
+  --font-sans: var(--font-poppins), "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ground: #d8d9de;
+  --color-ground-deep: #cbccce;
+  --color-paper: #ffffff;
+  --color-ink: #000000;
+  --color-ink-soft: #828282;
+
+  --color-crimson: #bc2029;
+  --color-action: #4c5aa8;
+  --color-action-deep: #3b4791;
+  --color-social: #3e3efe;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body {
+    background-color: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  ::selection {
+    background-color: #ffc43a;
+    color: #000000;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-action);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  input {
+    caret-color: var(--color-action);
+  }
+}
+
+/* ---------- stage & outer background ---------- */
+
+.stage {
+  --stage-y: clamp(16px, 3.5dvh, 28px);
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--stage-y) clamp(12px, 1.5vw, 20px);
+  background: radial-gradient(
+    120% 90% at 50% 8%,
+    #ebebf0 0%,
+    #dcdee4 55%,
+    #cbccce 100%
+  );
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* ---------- card wrapper (positions crane + card together) ---------- */
+
+.card-wrap {
+  position: relative;
+  width: min(
+    100%,
+    1400px,
+    calc((100dvh - (2 * var(--stage-y))) * 1400 / 968)
+  );
+  aspect-ratio: 1400 / 968;
+  height: auto;
+  max-height: 968px;
+  container-type: size;
+}
+
+/* ---------- card container (Rectangle 1 from Figma) ---------- */
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, #e6e6e6 100%);
+  box-shadow: 3px 4px 8.9px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20.66cqh 2.29cqw 4.13cqh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.card__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 62rem;
+  text-align: center;
+  position: relative;
+  z-index: 20;
+}
+
+/* ---------- crane rig & animations (Component 1 from Figma) ---------- */
+
+.crane-rig {
+  position: absolute;
+  top: clamp(-96px, -10cqh, -62px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.crane-drop-wrap {
+  animation: craneDrop 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+.crane-sway-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+  /* Hook stays fixed — only the suspended thread + logo sway below. */
+}
+
+.crane-hook-box {
+  width: 9.29cqw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  /* Static hook — no sway animation. */
+}
+
+.crane-hook-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.crane-logo-box {
+  position: relative;
+  width: 15.36cqw;
+  height: auto;
+  margin-top: -6.2cqh;
+  margin-left: -2cqw;
+  display: flex;
+  justify-content: center;
+  transform-origin: 50% 0%;
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  will-change: transform;
+  animation: craneSway 0.65s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.4s infinite
+    alternate;
+}
+
+.crane-logo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@keyframes craneDrop {
+  0% {
+    transform: translateY(-160%);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes craneSway {
+  0% {
+    transform: rotate(-1.5deg);
+  }
+  100% {
+    transform: rotate(1.5deg);
+  }
+}
+
+/* ---------- headline typography from Figma ---------- */
+
+.headline {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(42px, 5.71cqw, 80px);
+  line-height: 1;
+  letter-spacing: 0;
+  color: #000000;
+  text-align: center;
+  margin: 0;
+}
+
+.headline__accent {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1em;
+  color: #bc2029;
+  letter-spacing: 0;
+  display: inline;
+}
+
+.headline__regular {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* ---------- interactive section (Frame 55 / Group 2 from Figma) ---------- */
+
+.card__interactive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: clamp(18px, 2.48cqh, 24px);
+  z-index: 20;
+}
+
+.ask {
+  animation: formReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.socials {
+  animation: socialAppear 0.45s ease-out 0s both;
+}
+
+@keyframes formReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(72px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes socialAppear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ---------- prompt (Poppins 20px / 30px / Black from Figma) ---------- */
+
+.ask {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(8px, 1.34cqh, 13px);
+  width: min(100%, 43cqw);
+  flex: none;
+}
+
+.prompt {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(16px, 1.43cqw, 20px);
+  line-height: 30px;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+  min-height: 30px;
+  transition: color 180ms ease-out;
+}
+
+.prompt--wrong {
+  color: #bc2029;
+}
+
+/* ---------- text field input container (from Figma) ---------- */
+
+.notify {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: clamp(44px, 4.96cqh, 48px);
+  padding: 0;
+  padding-left: 22px;
+  border: 1px solid #e0e0e0;
+  border-radius: 63px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition:
+    border-color 180ms ease-out,
+    box-shadow 180ms ease-out;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.notify:focus-within {
+  border-color: #4c5aa8;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 0 0 3px rgba(76, 90, 168, 0.22);
+}
+
+.notify__field {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: none;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(14px, 1.14cqw, 16px);
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.notify__field::placeholder {
+  color: #828282;
+}
+
+.notify__field:focus {
+  outline: none;
+}
+
+.notify__field:-webkit-autofill,
+.notify__field:-webkit-autofill:hover,
+.notify__field:-webkit-autofill:focus {
+  -webkit-text-fill-color: #000000;
+  box-shadow: 0 0 0 1000px #ffffff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ---------- button (from Figma Buttons) ---------- */
+
+.notify__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: none;
+  height: clamp(44px, 4.96cqh, 48px);
+  min-width: clamp(96px, 7.79cqw, 109px);
+  padding: 0 clamp(18px, 1.71cqw, 24px);
+  border-radius: 65px 73px 73px 65px;
+  border: 0;
+  background: #4c5aa8;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(14px, 1.14cqw, 16px);
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease-out,
+    transform 160ms ease-out;
+}
+
+.notify__action:hover:not(:disabled) {
+  background: var(--color-action-deep);
+}
+
+.notify__action:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.notify__action:disabled {
+  cursor: default;
+}
+
+.notify--done {
+  border-color: #e0e0e0;
+  overflow: visible;
+}
+
+.notify--done .notify__field {
+  color: #828282;
+}
+
+.notify--done .notify__action {
+  background: var(--color-action-deep);
+  animation: actionStamp 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes actionStamp {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(76, 90, 168, 0.45);
+  }
+  38% {
+    transform: scale(0.92);
+    box-shadow: 0 0 0 6px rgba(76, 90, 168, 0.28);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 15px rgba(76, 90, 168, 0);
+  }
+}
+
+/* checkmark draws itself as the "stamp" */
+.notify__check path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: checkDraw 420ms cubic-bezier(0.65, 0, 0.35, 1) 130ms forwards;
+}
+
+@keyframes checkDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.prompt--success {
+  animation: successRise 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes successRise {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- caution-tape chips that fire on a successful submit ---------- */
+
+.notify-celebrate {
+  position: absolute;
+  top: 50%;
+  right: clamp(48px, 3.9cqw, 55px);
+  width: 0;
+  height: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.notify-celebrate__chip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--cw, 6px);
+  height: var(--ch, 12px);
+  border-radius: 1px;
+  background: var(--chip, #ffc43a);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  animation: chipBurst 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0ms)
+    both;
+  will-change: transform, opacity;
+}
+
+.notify-celebrate__chip--round {
+  border-radius: 50%;
+}
+
+@keyframes chipBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.6);
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--tx, 0px)),
+        calc(-50% + var(--ty, -56px))
+      )
+      rotate(var(--rot, 180deg)) scale(1);
+  }
+}
+
+.notify__spin {
+  animation: notify-spin 720ms linear infinite;
+}
+
+@keyframes notify-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- socials (Frame 59 / Frame 56, 57, 58 from Figma) ---------- */
+
+.socials {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.71cqw;
+  margin-top: clamp(10px, 1.86cqh, 18px);
+  padding: 0;
+  list-style: none;
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  width: 3.5cqw;
+  height: 3.5cqw;
+  border-radius: 1.75cqw;
+  background: #ffffff;
+  color: #3e3efe;
+  box-shadow: 0px 4px 7.6px rgba(0, 0, 0, 0.14);
+  transition:
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 200ms ease,
+    color 160ms ease-out;
+}
+
+.social:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.18);
+  color: #2b2be0;
+}
+
+.social svg {
+  width: 2.29cqw;
+  height: 2.29cqw;
+  display: block;
+}
+
+/* ---------- tape ribbons (image 1 from Figma) ---------- */
+
+.tape-field {
+  position: absolute;
+  top: auto;
+  bottom: calc(-1 * var(--stage-y) - 2px);
+  left: 50%;
+  width: 100vw;
+  max-width: none;
+  transform: translateX(-50%);
+  transform-origin: center center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.tape-image {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+  animation: tapeFloat 8s ease-in-out infinite alternate;
+}
+
+@keyframes tapeFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-4px);
+  }
+}
+
+/* ---------- responsive design ---------- */
+
+@media (max-width: 640px) {
+  .stage {
+    --stage-y: 12px;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    padding: 12px 10px;
+  }
+
+  .card-wrap {
+    width: 100%;
+    height: calc(100dvh - 24px);
+    max-height: none;
+    aspect-ratio: auto;
+  }
+
+  .card {
+    border-radius: 24px;
+    padding: clamp(156px, 23dvh, 184px) 16px clamp(40px, 7dvh, 60px);
+    height: calc(100dvh - 24px);
+  }
+
+  .crane-rig {
+    top: -62px;
+    left: 50%;
+    scale: none;
+    transform: translateX(-50%) scale(0.74);
+    transform-origin: top center;
+  }
+
+  .crane-hook-box {
+    width: 130px;
+  }
+
+  .crane-logo-box {
+    width: 215px;
+    margin-top: -60px;
+    margin-left: -30px;
+  }
+
+  .headline {
+    font-size: clamp(28px, 7.6vw, 32px);
+    line-height: 1.15;
+  }
+
+  .card__interactive {
+    margin-top: clamp(18px, 2.8dvh, 28px);
+  }
+
+  .ask {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .prompt {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Stack the email field above a full-width submit button on mobile. */
+  .notify {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .notify:focus-within {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .notify__field {
+    flex: none;
+    width: 100%;
+    height: 48px;
+    padding: 0 18px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 999px;
+    box-sizing: border-box;
+    transition:
+      border-color 180ms ease-out,
+      box-shadow 180ms ease-out;
+  }
+
+  .notify__field:focus {
+    border-color: #4c5aa8;
+    box-shadow: 0 0 0 3px rgba(76, 90, 168, 0.22);
+  }
+
+  .notify__action {
+    width: 100%;
+    height: 48px;
+    min-width: 0;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-size: 15px;
+  }
+
+  .notify-celebrate {
+    top: auto;
+    right: auto;
+    bottom: 24px;
+    left: 50%;
+  }
+
+  .socials {
+    gap: 10px;
+    margin-top: clamp(14px, 2.4dvh, 22px);
+  }
+
+  .social {
+    width: 42px;
+    height: 42px;
+  }
+
+  .social svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .tape-field {
+    position: absolute;
+    top: auto;
+    bottom: calc(-1 * var(--stage-y) - 2px);
+    left: 50%;
+    width: 142vw;
+    height: auto;
+    max-width: none;
+    transform: translateX(-50%);
+    margin: 0;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .tape-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crane-drop-wrap,
+  .crane-logo-box,
+  .ask,
+  .socials,
+  .tape-image {
+    animation: none !important;
+  }
+
+  .notify__spin {
+    animation: none;
+  }
+
+  .notify--done .notify__action,
+  .prompt--success {
+    animation: none !important;
+  }
+
+  .notify__check path {
+    animation: none !important;
+    stroke-dashoffset: 0;
+  }
+
+  .notify-celebrate {
+    display: none;
+  }
+}
