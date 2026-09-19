@@ -3,7 +3,7 @@
 import { useState, type CSSProperties, type FormEvent } from "react";
 import { copy } from "@/lib/site";
 
-type Status = "idle" | "sending" | "done" | "error";
+type Status = "idle" | "done" | "error";
 
 type Chip = {
   x: number;
@@ -17,8 +17,6 @@ type Chip = {
 };
 
 const ADDRESS = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
-const UNREACHABLE = "We couldn't reach the server just now. Try again in a moment.";
-
 /* The logo's own four inks: amber, action blue, crimson, teal. */
 const AMBER = "#ffc43a";
 const BLUE = "#4c5aa8";
@@ -53,9 +51,9 @@ export function NotifyAsk() {
   const done = status === "done";
   const wrong = status === "error";
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (status === "sending" || done) return;
+    if (done) return;
 
     const value = email.trim();
     if (!ADDRESS.test(value)) {
@@ -64,32 +62,17 @@ export function NotifyAsk() {
       return;
     }
 
-    setStatus("sending");
-    setMessage(null);
+    // Confirm immediately; persistence happens in the background and should not
+    // make the visitor wait for a third-party response.
+    setStatus("done");
+    setMessage(copy.success);
 
-    try {
-      const response = await fetch("/api/notify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value }),
-      });
-      const payload = (await response.json().catch(() => ({}))) as {
-        ok?: boolean;
-        error?: string;
-      };
-
-      if (!response.ok || !payload.ok) {
-        setStatus("error");
-        setMessage(payload.error ?? UNREACHABLE);
-        return;
-      }
-
-      setStatus("done");
-      setMessage(copy.success);
-    } catch {
-      setStatus("error");
-      setMessage(UNREACHABLE);
-    }
+    void fetch("/api/notify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: value }),
+      keepalive: true,
+    }).catch(() => undefined);
   }
 
   return (
@@ -130,7 +113,7 @@ export function NotifyAsk() {
             }
           }}
           readOnly={done}
-          disabled={status === "sending"}
+          disabled={done}
           aria-invalid={wrong}
           aria-describedby="notify-status"
         />
@@ -139,7 +122,7 @@ export function NotifyAsk() {
           type="submit"
           disabled={status === "sending" || done}
         >
-          {status === "sending" ? <Spinner /> : done ? <Check /> : null}
+          {done ? <Check /> : null}
           <span>{done ? copy.sent : copy.action}</span>
         </button>
 
@@ -170,24 +153,6 @@ export function NotifyAsk() {
         ) : null}
       </form>
     </>
-  );
-}
-
-function Spinner() {
-  return (
-    <svg
-      className="notify__spin"
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      aria-hidden="true"
-    >
-      <path d="M8 1.5A6.5 6.5 0 0 1 14.5 8" />
-    </svg>
   );
 }
 

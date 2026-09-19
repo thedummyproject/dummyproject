@@ -508,16 +508,6 @@
   }
 }
 
-.notify__spin {
-  animation: notify-spin 720ms linear infinite;
-}
-
-@keyframes notify-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* ---------- socials (Frame 59 / Frame 56, 57, 58 from Figma) ---------- */
 
 .socials {
@@ -756,10 +746,6 @@
   .socials,
   .tape-image {
     animation: none !important;
-  }
-
-  .notify__spin {
-    animation: none;
   }
 
   .notify--done .notify__action,
