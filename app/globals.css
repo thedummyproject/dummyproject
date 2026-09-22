@@ -26,7 +26,7 @@
   }
 
   body {
-    background-color: var(--color-ground);
+    background-color: #8e8d8d;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
@@ -64,12 +64,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--stage-y) clamp(12px, 1.5vw, 20px);
-  background: radial-gradient(
-    120% 90% at 50% 8%,
-    #ebebf0 0%,
-    #dcdee4 55%,
-    #cbccce 100%
-  );
+  background: linear-gradient(180deg, #f4f2f2 0%, #8e8d8d 100%);
   overflow: visible;
   box-sizing: border-box;
 }
@@ -78,14 +73,10 @@
 
 .card-wrap {
   position: relative;
-  width: min(
-    100%,
-    1400px,
-    calc((100dvh - (2 * var(--stage-y))) * 1400 / 968)
-  );
-  aspect-ratio: 1400 / 968;
-  height: auto;
-  max-height: 968px;
+  width: 1400px;
+  height: 968px;
+  max-width: 100%;
+  flex: 0 0 auto;
   container-type: size;
 }
 
@@ -584,6 +575,17 @@
 }
 
 /* ---------- responsive design ---------- */
+
+/* Below the 1440 x 1024 Figma frame: keep the 1400:968 ratio and scale down
+   proportionally instead of stretching width or height independently. */
+@media (max-width: 1439.98px), (max-height: 1023.98px) {
+  .card-wrap {
+    width: min(100%, calc((100dvh - (2 * var(--stage-y))) * 1400 / 968));
+    height: auto;
+    aspect-ratio: 1400 / 968;
+    max-height: none;
+  }
+}
 
 @media (max-width: 640px) {
   .stage {
