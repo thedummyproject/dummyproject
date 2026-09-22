@@ -142,6 +142,7 @@
   height: auto;
   display: flex;
   justify-content: center;
+  transform: translateY(10px);
   /* Static hook — no sway animation. */
 }
 
@@ -156,8 +157,8 @@
   position: relative;
   width: min(15.36cqw, 22.21cqh);
   height: auto;
-  margin-top: calc(-6.2cqh + clamp(8px, 1cqh, 12px));
-  margin-left: -2cqw;
+  margin-top: calc(-6.2cqh + clamp(12px, 1.2cqh, 16px));
+  margin-left: calc(-2cqw + 2px);
   display: flex;
   justify-content: center;
   transform-origin: 50% 0%;
