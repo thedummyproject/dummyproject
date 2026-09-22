@@ -95,7 +95,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: clamp(190px, 31.2cqh, 302px) 2.29cqw 4.13cqh;
+  padding: clamp(168px, 25cqh, 242px) 2.29cqw 4.13cqh;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -156,7 +156,7 @@
   position: relative;
   width: min(15.36cqw, 22.21cqh);
   height: auto;
-  margin-top: -6.2cqh;
+  margin-top: calc(-6.2cqh + clamp(8px, 1cqh, 12px));
   margin-left: -2cqw;
   display: flex;
   justify-content: center;
