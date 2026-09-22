@@ -554,8 +554,8 @@
   left: 50%;
   width: 100vw;
   max-width: none;
-  transform: translateX(-50%);
-  transform-origin: center center;
+  transform: translateX(-50%) scaleY(0.85);
+  transform-origin: bottom center;
   pointer-events: none;
   z-index: 10;
 }
@@ -718,7 +718,8 @@
     width: 142vw;
     height: auto;
     max-width: none;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scaleY(0.85);
+    transform-origin: bottom center;
     margin: 0;
     overflow: visible;
     pointer-events: none;
