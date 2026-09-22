@@ -56,26 +56,29 @@
 /* ---------- stage & outer background ---------- */
 
 .stage {
-  --stage-y: 28px;
+  --stage-y: clamp(12px, 2.6dvh, 28px);
   position: relative;
   width: 100%;
+  height: 100dvh;
   min-height: 100dvh;
   box-sizing: border-box;
   display: flex;
+  align-items: stretch;
   justify-content: center;
-  align-items: flex-start;
-  padding: 28px 20px;
+  padding: var(--stage-y) clamp(12px, 1.5vw, 20px);
   background: linear-gradient(180deg, #f4f2f2 0%, #8e8d8d 100%);
-  overflow: visible;
+  overflow: hidden;
 }
 
 /* ---------- card wrapper (positions crane + card together) ---------- */
 
 .card-wrap {
   position: relative;
-  width: min(1400px, calc(100vw - 40px));
-  aspect-ratio: 1400 / 968;
-  flex: none;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
   container-type: size;
 }
 
@@ -92,7 +95,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20.66cqh 2.29cqw 4.13cqh;
+  padding: clamp(190px, 31.2cqh, 302px) 2.29cqw 4.13cqh;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -102,7 +105,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 62rem;
+  max-width: none;
   text-align: center;
   position: relative;
   z-index: 20;
@@ -112,9 +115,11 @@
 
 .crane-rig {
   position: absolute;
-  top: clamp(-96px, -10cqh, -62px);
+  top: clamp(-140px, -11.57cqh, -62px);
   left: 50%;
   transform: translateX(-50%);
+  width: min(18.47cqw, 26.72cqh, 258.63px);
+  height: min(29cqw, 41.94cqh, 406px);
   z-index: 100;
   pointer-events: none;
   overflow: visible;
@@ -133,7 +138,7 @@
 }
 
 .crane-hook-box {
-  width: 9.29cqw;
+  width: min(9.29cqw, 13.43cqh);
   height: auto;
   display: flex;
   justify-content: center;
@@ -149,7 +154,7 @@
 
 .crane-logo-box {
   position: relative;
-  width: 15.36cqw;
+  width: min(15.36cqw, 22.21cqh);
   height: auto;
   margin-top: -6.2cqh;
   margin-left: -2cqw;
@@ -200,7 +205,7 @@
   font-family: var(--font-sans);
   font-style: normal;
   font-weight: 500;
-  font-size: clamp(42px, 5.71cqw, 80px);
+  font-size: clamp(42px, min(5.71cqw, 8.26cqh), 80px);
   line-height: 1;
   letter-spacing: 0;
   color: #000000;
@@ -232,7 +237,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: clamp(18px, 2.48cqh, 24px);
+  margin-top: clamp(18px, 3.31cqh, 32px);
   z-index: 20;
 }
 
@@ -271,7 +276,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: clamp(8px, 1.34cqh, 13px);
-  width: min(100%, 43cqw);
+  width: min(100%, 43cqw, 62.19cqh);
   flex: none;
 }
 
@@ -506,8 +511,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.71cqw;
-  margin-top: clamp(10px, 1.86cqh, 18px);
+  gap: min(0.71cqw, 1.03cqh);
+  margin-top: clamp(14px, 3.31cqh, 32px);
   padding: 0;
   list-style: none;
 }
@@ -515,9 +520,9 @@
 .social {
   display: grid;
   place-items: center;
-  width: 3.5cqw;
-  height: 3.5cqw;
-  border-radius: 1.75cqw;
+  width: min(3.5cqw, 5.06cqh);
+  height: min(3.5cqw, 5.06cqh);
+  border-radius: 50%;
   background: #ffffff;
   color: #3e3efe;
   box-shadow: 0px 4px 7.6px rgba(0, 0, 0, 0.14);
@@ -534,8 +539,8 @@
 }
 
 .social svg {
-  width: 2.29cqw;
-  height: 2.29cqw;
+  width: min(2.29cqw, 3.31cqh);
+  height: min(2.29cqw, 3.31cqh);
   display: block;
 }
 
