@@ -157,8 +157,9 @@
   position: relative;
   width: min(17.66cqw, 25.54cqh);
   height: auto;
+  top: -5px;
   margin-top: calc(-6.2cqh + clamp(12px, 1.2cqh, 16px));
-  margin-left: calc(-2.3cqw + 2px);
+  margin-left: calc(-2.3cqw + 6px);
   display: flex;
   justify-content: center;
   transform-origin: 50% 0%;
