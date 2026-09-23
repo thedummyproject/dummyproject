@@ -155,10 +155,10 @@
 
 .crane-logo-box {
   position: relative;
-  width: min(15.36cqw, 22.21cqh);
+  width: min(17.66cqw, 25.54cqh);
   height: auto;
   margin-top: calc(-6.2cqh + clamp(12px, 1.2cqh, 16px));
-  margin-left: calc(-2cqw + 2px);
+  margin-left: calc(-2.3cqw + 2px);
   display: flex;
   justify-content: center;
   transform-origin: 50% 0%;
@@ -557,9 +557,9 @@
   }
 
   .crane-logo-box {
-    width: 215px;
+    width: 247px;
     margin-top: -60px;
-    margin-left: -30px;
+    margin-left: -35px;
   }
 
   .headline {
