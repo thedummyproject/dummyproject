@@ -552,7 +552,7 @@
   top: auto;
   bottom: calc(-1 * var(--stage-y) - 2px);
   left: 50%;
-  width: 100vw;
+  width: 100dvw;
   max-width: none;
   transform: translateX(-50%) scaleY(0.85);
   transform-origin: bottom center;
@@ -715,7 +715,7 @@
     top: auto;
     bottom: calc(-1 * var(--stage-y) - 2px);
     left: 50%;
-    width: 142vw;
+    width: 100dvw;
     height: auto;
     max-width: none;
     transform: translateX(-50%) scaleY(0.85);
