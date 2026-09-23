@@ -1,47 +1,11 @@
 "use client";
 
-import { useState, type CSSProperties, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { copy } from "@/lib/site";
 
 type Status = "idle" | "done" | "error";
 
-type Chip = {
-  x: number;
-  y: number;
-  rot: number;
-  delay: number;
-  color: string;
-  w: number;
-  h: number;
-  round?: boolean;
-};
-
 const ADDRESS = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
-/* The logo's own four inks: amber, action blue, crimson, teal. */
-const AMBER = "#ffc43a";
-const BLUE = "#4c5aa8";
-const CRIMSON = "#bc2029";
-const TEAL = "#0a7f78";
-
-/* Caution-tape chips fired on a successful submit. */
-const CELEBRATION_CHIPS: Chip[] = [
-  { x: -54, y: -50, rot: -150, delay: 0, color: AMBER, w: 6, h: 12 },
-  { x: -34, y: -72, rot: 120, delay: 30, color: TEAL, w: 7, h: 13 },
-  { x: -16, y: -84, rot: 210, delay: 0, color: CRIMSON, w: 6, h: 10, round: true },
-  { x: 2, y: -90, rot: -90, delay: 45, color: AMBER, w: 5, h: 14 },
-  { x: 20, y: -80, rot: 160, delay: 18, color: BLUE, w: 7, h: 12 },
-  { x: 40, y: -62, rot: -190, delay: 62, color: AMBER, w: 6, h: 11, round: true },
-  { x: 56, y: -40, rot: 110, delay: 34, color: TEAL, w: 6, h: 13 },
-  { x: -62, y: -30, rot: 90, delay: 52, color: CRIMSON, w: 7, h: 12 },
-  { x: 66, y: -16, rot: 150, delay: 12, color: AMBER, w: 6, h: 10 },
-  { x: -48, y: -10, rot: -120, delay: 40, color: BLUE, w: 5, h: 13 },
-  { x: 52, y: -4, rot: 100, delay: 72, color: CRIMSON, w: 6, h: 12, round: true },
-  { x: -28, y: -88, rot: 70, delay: 8, color: AMBER, w: 7, h: 12 },
-  { x: 30, y: -90, rot: -170, delay: 48, color: TEAL, w: 6, h: 11 },
-  { x: -70, y: -18, rot: -100, delay: 26, color: AMBER, w: 6, h: 10 },
-  { x: 74, y: -30, rot: 130, delay: 56, color: BLUE, w: 7, h: 13 },
-  { x: 8, y: -74, rot: 230, delay: 22, color: CRIMSON, w: 6, h: 12 },
-];
 
 export function NotifyAsk() {
   const [email, setEmail] = useState("");
@@ -125,32 +89,6 @@ export function NotifyAsk() {
           {done ? <Check /> : null}
           <span>{done ? copy.sent : copy.action}</span>
         </button>
-
-        {done ? (
-          <span className="notify-celebrate" aria-hidden="true">
-            {CELEBRATION_CHIPS.map((chip, index) => (
-              <i
-                key={index}
-                className={
-                  chip.round
-                    ? "notify-celebrate__chip notify-celebrate__chip--round"
-                    : "notify-celebrate__chip"
-                }
-                style={
-                  {
-                    "--tx": `${chip.x}px`,
-                    "--ty": `${chip.y}px`,
-                    "--rot": `${chip.rot}deg`,
-                    "--delay": `${chip.delay}ms`,
-                    "--chip": chip.color,
-                    "--cw": `${chip.w}px`,
-                    "--ch": `${chip.h}px`,
-                  } as CSSProperties
-                }
-              />
-            ))}
-          </span>
-        ) : null}
       </form>
     </>
   );

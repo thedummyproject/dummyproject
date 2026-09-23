@@ -387,7 +387,7 @@
 }
 
 .notify__action:hover:not(:disabled) {
-  background: var(--color-action-deep);
+  background: #000000;
 }
 
 .notify__action:active:not(:disabled) {
@@ -408,22 +408,22 @@
 }
 
 .notify--done .notify__action {
-  background: #16a34a;
+  background: #00766d;
   animation: actionStamp 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes actionStamp {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.45);
+    box-shadow: 0 0 0 0 rgba(0, 118, 109, 0.45);
   }
   38% {
     transform: scale(0.92);
-    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.28);
+    box-shadow: 0 0 0 6px rgba(0, 118, 109, 0.28);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 15px rgba(22, 163, 74, 0);
+    box-shadow: 0 0 0 15px rgba(0, 118, 109, 0);
   }
 }
 
@@ -455,55 +455,6 @@
   }
 }
 
-/* ---------- caution-tape chips that fire on a successful submit ---------- */
-
-.notify-celebrate {
-  position: absolute;
-  top: 50%;
-  right: clamp(48px, 3.9cqw, 55px);
-  width: 0;
-  height: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.notify-celebrate__chip {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: var(--cw, 6px);
-  height: var(--ch, 12px);
-  border-radius: 1px;
-  background: var(--chip, #ffc43a);
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  animation: chipBurst 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0ms)
-    both;
-  will-change: transform, opacity;
-}
-
-.notify-celebrate__chip--round {
-  border-radius: 50%;
-}
-
-@keyframes chipBurst {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(0deg) scale(0.6);
-  }
-  12% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(
-        calc(-50% + var(--tx, 0px)),
-        calc(-50% + var(--ty, -56px))
-      )
-      rotate(var(--rot, 180deg)) scale(1);
-  }
-}
-
 /* ---------- socials (Frame 59 / Frame 56, 57, 58 from Figma) ---------- */
 
 .socials {
@@ -527,16 +478,6 @@
   background: #ffffff;
   color: #3e3efe;
   box-shadow: 0px 4px 7.6px rgba(0, 0, 0, 0.14);
-  transition:
-    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 200ms ease,
-    color 160ms ease-out;
-}
-
-.social:hover {
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.18);
-  color: #2b2be0;
 }
 
 .social svg {
@@ -688,13 +629,6 @@
     font-size: 15px;
   }
 
-  .notify-celebrate {
-    top: auto;
-    right: auto;
-    bottom: 24px;
-    left: 50%;
-  }
-
   .socials {
     gap: 10px;
     margin-top: clamp(14px, 2.4dvh, 22px);
@@ -753,9 +687,5 @@
   .notify__check path {
     animation: none !important;
     stroke-dashoffset: 0;
-  }
-
-  .notify-celebrate {
-    display: none;
   }
 }
