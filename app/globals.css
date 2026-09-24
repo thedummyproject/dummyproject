@@ -238,8 +238,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  margin-top: clamp(18px, 3.31cqh, 32px);
+  width: min(41.806cqw, 602px);
+  margin-top: clamp(30px, 10cqh,  4px);
   z-index: 20;
 }
 
@@ -461,11 +461,22 @@
 .socials {
   position: relative;
   z-index: 30;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: min(0.71cqw, 1.03cqh);
-  margin-top: clamp(14px, 3.31cqh, 32px);
+
+  gap: 10px;
+
+  width: 167px;
+  height: 49px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Figma: form bottom se socials tak 32px */
+  margin-top: clamp(4px, 1.6cqh, 16px);
+
   padding: 0;
   list-style: none;
 }
@@ -473,8 +484,10 @@
 .social {
   display: grid;
   place-items: center;
-  width: min(3.5cqw, 5.06cqh);
-  height: min(3.5cqw, 5.06cqh);
+
+  width: 49px;
+  height: 49px;
+
   border-radius: 50%;
   background: #ffffff;
   color: #3e3efe;
@@ -482,8 +495,8 @@
 }
 
 .social svg {
-  width: min(2.29cqw, 3.31cqh);
-  height: min(2.29cqw, 3.31cqh);
+  width: 30px;
+  height: 30px;
   display: block;
 }
 
