@@ -204,6 +204,8 @@
 /* ---------- headline typography from Figma ---------- */
 
 .headline {
+    position: relative;
+  top: 20px;
   font-family: var(--font-sans);
   font-style: normal;
   font-weight: 500;
