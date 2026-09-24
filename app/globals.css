@@ -686,6 +686,33 @@
   }
 }
 
+/* ---------- mobile portrait: full-width notify section ---------- */
+
+@media (max-width: 640px) and (orientation: portrait) {
+  .card__interactive {
+    width: 100%;
+    max-width: none;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .ask {
+    width: 100%;
+  }
+
+  .notify {
+    width: 100%;
+  }
+
+  .notify__field {
+    width: 100%;
+  }
+
+  .notify__action {
+    width: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .crane-drop-wrap,
   .crane-logo-box,
