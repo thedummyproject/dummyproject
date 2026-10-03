@@ -138,7 +138,7 @@
 }
 
 .crane-hook-box {
-  width: min(9.29cqw, 13.43cqh);
+  width: 90px;
   height: auto;
   display: flex;
   justify-content: center;
@@ -155,11 +155,11 @@
 
 .crane-logo-box {
   position: relative;
-  width: min(17.66cqw, 25.54cqh);
+  width: 170px;
   height: auto;
   top: -5px;
-  margin-top: calc(-6.2cqh + clamp(12px, 1.2cqh, 16px));
-  margin-left: calc(-2.3cqw + 6px);
+  margin-top: -38px;
+  margin-left: -16px;
   display: flex;
   justify-content: center;
   transform-origin: 50% 0%;
@@ -561,21 +561,7 @@
   }
 
   .crane-rig {
-    top: -76px;
-    left: 50%;
-    scale: none;
-    transform: translateX(-50%) scale(0.74);
-    transform-origin: top center;
-  }
-
-  .crane-hook-box {
-    width: 130px;
-  }
-
-  .crane-logo-box {
-    width: 247px;
-    margin-top: -60px;
-    margin-left: -35px;
+    top: -25px;
   }
 
   .headline {
