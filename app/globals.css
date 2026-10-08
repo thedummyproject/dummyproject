@@ -648,7 +648,7 @@
 
   .tape-field {
     position: absolute;
-    top: calc(236px + clamp(156px, 23dvh, 184px) + clamp(40px, 5.5dvh, 56px) + clamp(14px, 2.4dvh, 22px));
+    top: calc(236px + clamp(156px, 23dvh, 184px) + clamp(40px, 5.5dvh, 56px) + clamp(14px, 2.4dvh, 22px) - 56px);
     bottom: auto;
     left: 50%;
     width: 100dvw;
